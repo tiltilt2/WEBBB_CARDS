@@ -17,7 +17,7 @@ const [form, setForm] = useState({
     category: ''
 });
 
-// Получение товаров
+
 const loadProducts = async () => {
     try {
         const response = await fetch('/api/products');
@@ -32,7 +32,7 @@ useEffect(() => {
     loadProducts();
 }, []);
 
-// Добавление товара
+
 const addProduct = async (e) => {
     e.preventDefault();
 
@@ -68,7 +68,7 @@ const addProduct = async (e) => {
     }
 };
 
-// Удаление товара
+
 const deleteProduct = async (id) => {
     if (!confirm('Удалить этот товар?')) return;
 
@@ -87,7 +87,7 @@ const deleteProduct = async (id) => {
     }
 };
 
-// Поиск и фильтрация
+
 let filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(search.toLowerCase())
 );
@@ -110,30 +110,25 @@ return (
     <div className="app">
 
         <header className="header">
-            <div className="logo">TECH<span>STORE</span></div>
-
-            <div className="header-info">
-                Каталог компьютерной техники
-            </div>
+            <div className="logo">super<span>MAGAZINEE</span></div>
 
             <button
                 className="add-button"
                 onClick={() => setShowForm(!showForm)}
             >
-                + Добавить товар
+                + добавить товар
             </button>
         </header>
 
         <main className="container">
 
             <section className="intro">
-                <h1>Каталог техники</h1>
-                <p>Всё необходимое для работы, учёбы и развлечений</p>
+                <h1>Каталог самой классной техники</h1>
             </section>
 
             {showForm && (
                 <form className="product-form" onSubmit={addProduct}>
-                    <h2>Добавление товара</h2>
+                    <h2>Создание нового товара</h2>
 
                     <input
                         type="text"
@@ -184,7 +179,7 @@ return (
 
                 <input
                     type="text"
-                    placeholder="Поиск товаров..."
+                    placeholder="Поиск"
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                 />
@@ -193,7 +188,7 @@ return (
                     value={category}
                     onChange={e => setCategory(e.target.value)}
                 >
-                    <option value="">Все категории</option>
+                    <option value="">Категория не выбрана</option>
 
                     {categories.map(item => (
                         <option key={item} value={item}>
@@ -270,7 +265,7 @@ return (
         </main>
 
         <footer>
-            TECHSTORE © 2026
+            MAGAZINEE © 2026
         </footer>
 
     </div>

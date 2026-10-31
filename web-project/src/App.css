@@ -8,7 +8,7 @@ body {
     background: #fff5f8;
     color: #593c4a;
 }
-/* Шапка */
+
 .header {
     background: linear-gradient(135deg, #f7a8c4, #e982aa);
     color: white;
@@ -30,7 +30,7 @@ body {
     color: #fff0f5;
     font-size: 14px;
 }
-/* Кнопки */
+
 button {
     cursor: pointer;
     border: none;
@@ -67,7 +67,7 @@ button {
     color: #a77c8e;
     line-height: 1.5;
 }
-/* Фильтры */
+
 .filters {
     display: flex;
     gap: 15px;
@@ -96,7 +96,7 @@ button {
     color: #a77c8e;
     margin-bottom: 20px;
 }
-/* Карточки товаров */
+
 .products {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -211,7 +211,7 @@ button {
 .product-form button:hover {
     background: #d65e8d;
 }
-/* Пустой список */
+
 .empty {
     text-align: center;
     padding: 60px;
@@ -219,7 +219,7 @@ button {
     background: white;
     border-radius: 18px;
 }
-/* Подвал */
+
 footer {
     text-align: center;
     padding: 25px;
@@ -227,13 +227,13 @@ footer {
     color: white;
     margin-top: 30px;
 }
-/* Адаптация под планшеты */
+
 @media (max-width: 900px) {
     .products {
         grid-template-columns: repeat(2, 1fr);
     }
 }
-/* Адаптация под телефоны */
+
 @media (max-width: 600px) {
     .products {
         grid-template-columns: 1fr;
