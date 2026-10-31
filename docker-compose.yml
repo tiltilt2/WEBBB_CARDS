@@ -1,0 +1,63 @@
+services:
+
+  frontend:
+    build:
+      context: ./web-project
+      dockerfile: Dockerfile
+    container_name: catalog_frontend
+    ports:
+      - "5174:5174"
+    volumes:
+      - ./web-project:/app
+      - /app/node_modules
+    depends_on:
+      - server
+    networks:
+      - catalog_network
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: catalog_server
+    ports:
+      - "3001:3000"
+    environment:
+      DB_HOST: database
+      DB_PORT: 5432
+      DB_NAME: catalog
+      DB_USER: postgres
+      DB_PASSWORD: 12345
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - catalog_network
+
+  database:
+    image: postgres:16-alpine
+    container_name: catalog_database
+    restart: always
+    environment:
+      POSTGRES_DB: catalog
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d catalog"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - catalog_network
+
+volumes:
+  postgres_data:
+
+networks:
+  catalog_network:
+    driver: bridge
